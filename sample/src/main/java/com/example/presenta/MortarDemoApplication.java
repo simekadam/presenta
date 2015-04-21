@@ -56,9 +56,11 @@ public class MortarDemoApplication extends Application {
   private static MortarDemoApplication instance;
 
   @Override public Object getSystemService(String name) {
-    Object mortarService = rootScope.getService(name);
-    if (mortarService != null) return mortarService;
+    try {
+      return rootScope.getService(name);
 
-    return super.getSystemService(name);
+    } catch (IllegalArgumentException ex) {
+      return super.getSystemService(name);
+    }
   }
 }
